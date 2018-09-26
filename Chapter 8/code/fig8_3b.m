@@ -15,7 +15,7 @@
 % N - the network description
 
 % Load constants
-load('cognitiveNetworkWorkspace')
+load('compNiche_Data')
 clear('popDynamics','frequency','Yhistory','Ehistory','CN_Yhistory','freqHistory','activeHistory')
 
 Z = 1e5;
