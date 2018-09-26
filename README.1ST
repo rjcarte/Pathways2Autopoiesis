@@ -1,1 +1,5 @@
-Simulation code for the information niche and computation niche models, with supporting code, will appear here on 5th October 2018.
+This repository contains the MATLAB r2016b simulation code for the information niche and computation niche models described in my thesis 'Pathways to Autopoiesis'.
+
+I have prepared the simulation code to reproduce the results presented in Chapters 4 - 9. Hence, each folder in this repository contains the code and example plots. 
+
+To run a MATLAB simulation simply load the relevant .m file into your MATLAB environment and run it. The code will run - this can take anywhere from 5 minutes to 1 hr depending on your computer system specifications - and output a graph illustrating the time-series of the composition of the population.
