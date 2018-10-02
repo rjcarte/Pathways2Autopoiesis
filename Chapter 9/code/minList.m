@@ -14,7 +14,7 @@ function [index,minL] = minList(L,types)
 % Create inverse transition list for each state
 d = inverseList(L);
 
-% Create initial partition; e-transducer states are all accepting states
+% Create initial partition; automata states are all accepting states
 % so initial partition includes all states
 initP = d(:,1);
 initP(end+1:size(d,1)+size(d,1)) = d(:,3);

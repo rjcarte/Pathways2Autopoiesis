@@ -1,5 +1,3 @@
-% Need to make this a multi-state function
-% Currently only supports 2-state machine interactions?
 %
 % INPUTS:
 %
@@ -37,23 +35,7 @@ if ~isempty(Tc)
     end
 
     if ~isempty(Tc) && index == 0
-    
-    %if mode == 0
-    % Remove unreachable states
-    %[reachable,unreachable] = findUnreachableStates(Tc);
-    %for r=1:length(unreachable)
-    %    [R] = find(Tc(:,1)==unreachable(r));
-    %    if ~isempty(R)
-    %        Tc(R,:)=[];
-    %    end
-    %    [S] = find(Tc(:,3)==unreachable(r));
-    %    if ~isempty(S)
-    %        Tc(S,:)=[];
-    %    end
-    %end
-    %end
-    
-    %if ~isempty(Tc)
+
         Tc = reLabel(Tc);
         index = findList(Tc,types);
     

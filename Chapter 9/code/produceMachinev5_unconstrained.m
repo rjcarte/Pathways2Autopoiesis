@@ -98,7 +98,7 @@ for i=1:size(G,1)
                         % New type. Add it to the population.
                         updatedG(i,II(RR(j))) = length(f)+1;
                         newObjects(a) = updatedG(i,II(RR(j)));
-                        rebuildFlag = 1;
+                        %rebuildFlag = 1;
                         f(end+1,:) = [0 1];
                         frequency(end+1)=0;
                         types{end+1}=result;

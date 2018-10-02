@@ -127,7 +127,7 @@ while z <= Z
         Yhistory{z} = CY;
         Ghistory{z} = CG;
     end
-    z=z+1;
+    z=z+1
 end
 
 pop = convertPopCell2Matrix (popDynamics);
