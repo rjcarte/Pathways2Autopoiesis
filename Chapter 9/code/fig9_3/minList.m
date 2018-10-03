@@ -22,9 +22,7 @@ initP = unique(initP)';
         
 % Create initial waiting list by adding the first partition set
 W{1}=initP;
-%W{2}=[];
 P{1}=W{:};
-%P{2}=[];
 
 % while there are still items in the waiting list
 while ~isempty(W)

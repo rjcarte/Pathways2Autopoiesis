@@ -1,5 +1,17 @@
-This repository contains the MATLAB r2016b simulation code for the information niche and computation niche models described in my thesis 'Pathways to Autopoiesis'.
+This repository contains the MATLAB r2016b simulation code for the information niche and computation niche models described in my thesis 'Pathways to Autopoiesis', and also supporting documentation describing the high level algorithms of those simulations.
 
-I have prepared the simulation code to reproduce the results presented in Chapters 4 - 9. Hence, each folder in this repository contains the code and example plots. 
+I have prepared the simulation code to reproduce the results presented in Chapters 4 - 9. Hence, each folder in this repository contains the code and example plots from the corresponding chapter.
+
+The following .pdf files are also supplied to give a high level overview of the information niche and computation niche simulations:
+
+Table_of_Contents.pdf - The directory of MATLAB files in each folder, and the simulation results that are produced from the named MATLAB .m file.
+	
+infoNiche_algorithm.pdf	- An overview of the information niche model simulation procedure including the main constant and variables used.
+
+compNiche_algorithm.pdf	- An overview of the computation niche model simulation procedure including the main constant and variables used.
+
+computationNiche_function_directory.pdf	- A list and description of all the MATLAB code functions (developed by me) used in the computation niche simulations.
+
+multistate_automata_algorithm.pdf - An overview of the procedure for minimising a multi-state automata, and its validation (or not) as an epsilon-machine.
 
 To run a MATLAB simulation simply load the relevant .m file into your MATLAB environment and run it. The code will run - this can take anywhere from 5 minutes to 1 hr depending on your computer system specifications - and output a graph illustrating the time-series of the composition of the population.
