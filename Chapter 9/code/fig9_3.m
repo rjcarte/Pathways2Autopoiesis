@@ -3,17 +3,15 @@
 % (c) 2018 Richard J. Carter
 % University of Bristol
 
-load('cognitiveNetworkWorkspace')
+% IMPORTANT NOTE: this simulation takes > 24 hrs to execute with Z=50. To reduce the
+% simulation time to several hours set Z < 10.
 
-clear('popDynamics')
+% Load interaction network of seed population
+load('seedAutomata')
 
 % SIMULATION PARAMETERS
-Z = 200;
+Z = 50;
 z = 1;
-
-numCores = [];
-
-phi=0;
 
 % DEFINE POPULATION ENVIRONMENT
 % Carrying capacity of each cell
@@ -25,26 +23,12 @@ N = 100000;
 % reproduction/interactions)
 mu = N;
 
-% Reproduction threshold. This is the probability of a niche that has
-% reached its reproductive capacity undergoes reproduction into a
-% neighbouring niche
-reproThreshold = 0;
-
-% Mutation rate of a niche undergoing reproduction into a neighbouring site
-mutationRate = 0;
-
 % Environment grid size (n)
 n = 1;
 nicheN = n*n;
 
-% Environmental parameters
-c = 0;
-v = 0;
-envPhi = 0;
-nichePhi = 0;
-
-% INITIALISE COGNITIVE NICHE POPULATION
-% Declare cell arrays for population of cognitive niches
+% INITIALISE COMPUTATION NICHE POPULATION
+% Declare cell arrays for population
 initialTypes = CNtypes;
 types=initialTypes;
 
@@ -52,46 +36,40 @@ types=initialTypes;
 indN = round(N/length(types));
 N = indN * length(types);
 
-% The information network of each cognitive niche
+% The membrane of each computation niche
 CN = cell(1,nicheN);
 
-% The input probability distribution of each node in a cognitive niche
+% The input probability distribution of each node in a computation niche
 CX = cell(1,nicheN);
 
-% The output probability distribution of each node in a cognitive niche
+% The output probability distribution of each node in a computation niche
 CY = cell(1,nicheN);
 
-% The sigma sets for each cognitive niche
+% The sigma sets for each computation niche
 Csigma = cell(1,nicheN);
 
-% The normalised frequency distribution of each cognitive niche's
+% The normalised frequency distribution of each computation niche's
 % population
 Cf = cell(1,nicheN);
 
-% The absolute count of machine types in a cognitive niche's population
+% The absolute count of machine types in a computation niche's population
 Cfrequency = cell(1,nicheN);
 
-% The activity pattern of nodes in the information layer of the CN
+% The activity pattern of nodes in the membrane of the niche
 Cactive = cell(1,nicheN);
 
 % The current proportion of the carrying capacity occupied within each
 % niche
 capacity = zeros(n,n);
 
-% Index of the machine types in each cognitive niche
+% Index of the machine types in the computation niche
 Ctypes = cell(1,nicheN);
 for i=1:length(Ctypes)
     Ctypes{i} = types;
 end
 
-% The interaction matrix of each cognitive niche
-%CG = cell(1,nicheN);
-%for i=1:nicheN
-%    CG{i} = generateCNG(Ctypes,lookup);
-%    i
-%end
-
-CG{1} = Gseed;
+% The interaction network for the seed population
+CG{1} = Gseed_unconstrained;
 
 % Initialise the CN population
 for i=1:nicheN
@@ -100,14 +78,14 @@ for i=1:nicheN
     %
     % Returns:
     %
-    % INFORMATION LAYER
-    % CN - a cognitive niche in the population
-    % CY - output distribution of each niche
-    % CX - input distribution of each niche
+    % MEMBRANE
+    % CN - the membrane network
+    % CY - output distribution of each membrane automata
+    % CX - input distribution of each membrane automata
     %
-    % REPLICATION LAYER
-    % Cfrequency - absolute count of the population in each CN
-    % Cf - normalised frequency distribution of the population in each CN
+    % INTERNAL POPULATION
+    % Cfrequency - absolute count of the internal automata population
+    % Cf - normalised frequency distribution of the population in the CN
     [CN{i},Cfrequency{i},Cf{i}] = initCNv2(CG{i},mu);
     CY{i} = initialiseCY(types);
     Csigma{i} = createSigmaSet(types);
@@ -128,8 +106,11 @@ for i=1:n
     end
 end
 
+% Declare time-series matrices
 popDynamics = cell(Z,length(CN));
 activeHistory = [];
+
+% Housekeeping variables
 noChange = 0;
 previousAll = 0;
 finalz = 0;
@@ -137,18 +118,22 @@ sigmaBackup = Csigma;
 
 while z <= Z
 
-    % PART 1 - UPDATE EACH COGNITIVE NICHE
-    % Update information layer and replication layer in each cognitive niche at time t
+    % UPDATE THE COMPUTATION NICHE
+    % Update membrane and internal population at time t
     for i=1:length(CN)
         checks = check4errors(CN(i),CG{i},CY{i},Ctypes{i},Cfrequency{i},Cf{i});
         if length(unique(checks)) > 1
             keyboard
         end
-        [Cfrequency{i},Cf{i},CY{i},CG{i},Ctypes(i),CN{i},Csigma{i},active] = updateCNv5(CN(i),CY{i},CG{i},Ctypes{i},Csigma{i},Cfrequency{i},Cf{i},N,lookup,numCores);
-        popDynamics{z,i} = Cf{i}
+        [Cfrequency{i},Cf{i},CY{i},CG{i},Ctypes(i),CN{i},Csigma{i},active] = updateCNv5_unconstrained(CN(i),CY{i},CG{i},Ctypes{i},Csigma{i},Cfrequency{i},Cf{i},N,lookup,[]);
+        popDynamics{z,i} = Cf{i};
         activeHistory{z} = active;
         Yhistory{z} = CY;
         Ghistory{z} = CG;
     end
-    z=z+1;
+    z=z+1
 end
+
+pop = convertPopCell2Matrix (popDynamics);
+plot(pop)
+figure(1)
