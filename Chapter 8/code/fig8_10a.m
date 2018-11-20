@@ -203,3 +203,5 @@ while z <= Z
 end
 
 Yhistory = convertYhist2Ystream(Yhistory,1);
+figure(1)
+plot(popDynamics)

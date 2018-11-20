@@ -8,7 +8,7 @@ load('interactingNiche_G')
 
 clear('popDynamics','frequency','norm_freq')
 
-Z = 1e8;
+Z = 1e7;
 phi = 0;
 
 % Sampling frequency of the population
@@ -123,3 +123,5 @@ while z < Z
     z = z + 1;
 
 end
+figure(1)
+plot(popDynamics)

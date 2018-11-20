@@ -14,7 +14,7 @@
 
 % Load automata information e.g. automata types ('list') and the automata
 % interaction matrix ('G')
-%load('interactingNiche_G')
+load('jointG')
 
 % Clear existing workspace (housekeeping)
 clear('frequency','cumFrequency','popDynamics','M','norm_freq');

@@ -130,3 +130,6 @@ while z < Z
     z = z + 1;
 
 end
+
+figure(1)
+plot(popDynamics)

@@ -127,3 +127,6 @@ while z < Z
         phi = 0.65;
     end
 end
+
+figure(1)
+plot(popDynamics)
