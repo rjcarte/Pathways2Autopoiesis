@@ -15,12 +15,10 @@
 
 % Load automata information e.g. automata types ('list') and the automata
 % interaction matrix ('G')
-%load('automata')
+load('automata')
 
 % Clear existing workspace (housekeeping)
 clear('frequency','cumFrequency','popDynamics','M');
-
-G=seedG;
 
 % SIMULATION PARAMETERS
 Z = 1e6; % Number of iterations of the simulation
@@ -28,7 +26,7 @@ z = 1; % Iteration counter
 
 % ENVIRONMENT PARAMETERS
 % Set to produce niche B
-n = 321; % Width of the lattice
+n = 300; % Width of the lattice
 M = zeros(n,n,'int16'); % Create the lattice
 neighbourhood = 9; % Moore neighbourhood interactions
 phi = 0; % Influx rate of randomly generated automata into population
@@ -44,7 +42,6 @@ N = INITTYPE * 800; % Population size
 MAXTYPES = 1:INITTYPE; % Population diversity
 
 % INITIALISE THE SIMULATION
-
 % Create a uniform probability distribution of all object types
 mdist=zeros(1,INITTYPE);
 mdist(1:INITTYPE) = 1/INITTYPE;

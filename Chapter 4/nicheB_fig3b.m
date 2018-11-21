@@ -20,12 +20,12 @@ load('automata')
 clear('frequency','cumFrequency','popDynamics','M');
 
 % SIMULATION PARAMETERS
-Z = 1e8; % Number of iterations of the simulation
+Z = 1e7; % Number of iterations of the simulation
 z = 1; % Iteration counter
 
 % ENVIRONMENT PARAMETERS
 % Set to produce niche B
-n = 600; % Width of the lattice
+n = 300; % Width of the lattice
 M = zeros(n,n,'int16'); % Create the lattice
 neighbourhood = 9; % Moore neighbourhood interactions
 phi = 0; % Influx rate of randomly generated automata into population

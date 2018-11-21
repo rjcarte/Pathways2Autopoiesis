@@ -111,5 +111,5 @@ while z < Z
 
 end
 
+figure(1)
 plot(popDynamics)
-figure
